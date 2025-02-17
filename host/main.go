@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	extism.SetLogLevel(extism.LogLevelTrace)
 	manifest := extism.Manifest{
 		Wasm: []extism.Wasm{
 			extism.WasmFile{Path: "../plugin/main.wasm"},
@@ -36,7 +37,8 @@ func main() {
 	}
 
 	data := []byte("Hello, World!")
-	exit, out, err := plugin.Call("count_vowels", data)
+	exit, out, err := plugin.Call("_start", data)
+	// exit, out, err := plugin.Call("count_vowels", data)
 	plugin.SetLogger(func(level extism.LogLevel, s string) {
 		fmt.Println(level, s)
 	})
